@@ -50,6 +50,43 @@
       [hidden] {
         display: none !important;
       }
+      body.loading-screen-active { overflow: hidden; }
+      .site-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 20000;
+        display: grid;
+        place-items: center;
+        background: #0f4539;
+        color: #fff;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 420ms ease, visibility 420ms ease;
+      }
+      .site-loader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+      .site-loader-content { width: min(340px, calc(100vw - 48px)); text-align: center; }
+      .site-loader-mark { width: min(250px, 72vw); margin: 0 auto 25px; perspective: 760px; }
+      .site-loader-mark img {
+        display: block;
+        width: 100%;
+        height: auto;
+        mix-blend-mode: multiply;
+        transform-style: preserve-3d;
+        animation: loader-cassette-spin 2.8s linear infinite;
+      }
+      @keyframes loader-cassette-spin {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(360deg); }
+      }
+      .site-loader-name { margin: 0; color: #fff; font: 700 14px/1.5 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+      .site-loader-caption { margin: 6px 0 25px; color: #d4e2d9; font-size: 13px; letter-spacing: .06em; }
+      .site-loader-track { height: 5px; overflow: hidden; background: #ffffff35; }
+      .site-loader-bar { display: block; width: 0; height: 100%; background: #e2b765; transition: width 100ms linear; }
+      .site-loader-reading { display: flex; justify-content: space-between; margin-top: 10px; color: #e6efe9; font-size: 12px; font-variant-numeric: tabular-nums; letter-spacing: .09em; }
+      @media (prefers-reduced-motion: reduce) {
+        .site-loader-mark img { animation: none; }
+        .site-loader, .site-loader-bar { transition: none; }
+      }
       .header {
         background: var(--green);
         color: #fff;
@@ -2585,8 +2622,28 @@
       }
       .media-dialog::backdrop { background: #102a25d9; backdrop-filter: blur(4px); }
       .media-dialog-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .8fr); min-height: min(620px, calc(100dvh - 34px)); }
-      .media-dialog-visual { display: grid; place-items: center; min-height: 400px; padding: 20px; background: #e4ece5; }
+      .media-dialog-visual { position: relative; display: grid; place-items: center; min-height: 400px; padding: 20px; background: #e4ece5; }
       .media-dialog-visual img { display: block; max-width: 100%; max-height: min(76dvh, 780px); object-fit: contain; }
+      .media-dialog-arrow {
+        position: absolute;
+        z-index: 9997;
+        top: 50%;
+        display: grid;
+        width: 46px;
+        height: 54px;
+        place-items: center;
+        transform: translateY(-50%);
+        border: 1px solid #fff;
+        background: #173c36e8;
+        color: #fff;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 180ms ease, border-color 180ms ease;
+      }
+      .media-dialog-arrow:hover, .media-dialog-arrow:focus-visible { background: #b96040; border-color: #f4d6bb; }
+      .media-dialog-prev { left: 14px; }
+      .media-dialog-next { right: 14px; }
       .media-dialog-copy { position: relative; display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 4vw, 50px); }
       .media-dialog-close { position: absolute; top: 18px; right: 20px; border: 0; border-bottom: 1px solid #9bb7a2; background: transparent; color: var(--green); padding: 5px 0; font-weight: 700; cursor: pointer; }
       .media-dialog-kicker { margin: 0 0 13px; color: #bd6847; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
@@ -2875,7 +2932,16 @@
       #customCursor.is-hovering ~ .cursor-trail-dot { background: #e17b35 !important; }
     </style>
   </head>
-  <body>
+  <body class="loading-screen-active" aria-busy="true">
+    <div class="site-loader" id="siteLoader" role="status" aria-live="polite" aria-label="Loading department website">
+      <div class="site-loader-content">
+        <div class="site-loader-mark"><img src="site-BMLogo-loader.png" alt="Tzu Chi University Department of Business Management" /></div>
+        <p class="site-loader-name">Department of Business Management</p>
+        <p class="site-loader-caption">Tzu Chi University · 載入中</p>
+        <div class="site-loader-track" role="progressbar" aria-label="Page loading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="site-loader-bar" id="siteLoaderBar"></span></div>
+        <div class="site-loader-reading"><span>Loading</span><span><strong id="siteLoaderPercent">0</strong>%</span></div>
+      </div>
+    </div>
     <header class="header">
       <div class="head">
         <a
@@ -3128,7 +3194,7 @@
             </figure>
             <figure class="home-photo" role="group" aria-roledescription="slide" aria-label="Photo 4 of 5">
               <img
-                src="home-SP04.webp"
+                src="home-SP04-optimized.jpg" data-source-file="home-SP04.png"
                 alt="Student studying independently at a campus study desk"
                 data-alt-en="Student studying independently at a campus study desk"
                 data-alt-zh="學生在校園自習空間專心學習"
@@ -3141,7 +3207,7 @@
             </figure>
             <figure class="home-photo" role="group" aria-roledescription="slide" aria-label="Photo 5 of 5">
               <img
-                src="home-SP05.webp"
+                src="home-SP05-optimized.jpg" data-source-file="home-SP05.jpg"
                 alt="Tzu Chi University library reading space"
                 data-alt-en="Tzu Chi University library reading space"
                 data-alt-zh="慈濟大學圖書館閱覽空間"
@@ -3491,14 +3557,11 @@
         <div id="careerMedia" class="career-art">
           <figure>
             <img
-              class="en"
+              id="careerGuideImage"
               src="career-path-english.svg"
               alt="English career guide for employment and entrepreneurship"
-            /><img
-              class="zh"
-              hidden
-              src="career-path-chinese.png"
-              alt="就業與創業職涯方向圖"
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>
               <span class="en">English translation of the department career guide.</span
@@ -3929,7 +3992,11 @@
     </dialog>
     <dialog class="media-dialog" id="mediaDialog" aria-labelledby="mediaDialogTitle">
       <div class="media-dialog-layout">
-        <div class="media-dialog-visual"><img id="mediaDialogImage" src="" alt="" /></div>
+        <div class="media-dialog-visual">
+          <img id="mediaDialogImage" src="" alt="" />
+          <button class="media-dialog-arrow media-dialog-prev" type="button" onclick="moveMediaViewer(-1)" aria-label="Previous image / 上一張" title="Previous image / 上一張">←</button>
+          <button class="media-dialog-arrow media-dialog-next" type="button" onclick="moveMediaViewer(1)" aria-label="Next image / 下一張" title="Next image / 下一張">→</button>
+        </div>
         <div class="media-dialog-copy">
           <button class="media-dialog-close" type="button" onclick="closeMediaViewer()"><span class="en">Close</span><span class="zh" hidden>關閉</span> ×</button>
           <p class="media-dialog-kicker"><span class="en">Department introduction</span><span class="zh" hidden>系所簡介</span></p>
@@ -4738,7 +4805,7 @@
           esc(altZh || alt || '') +
           '" alt="' +
           esc(alt || '') +
-          '" onerror="fallback(this)"></' + wrapper + '>'
+          '" loading="lazy" decoding="async" onerror="fallback(this)"></' + wrapper + '>'
         );
       }
       function fallback(img) {
@@ -4859,32 +4926,82 @@
       function returnToNews() {
         go('news');
       }
-      function openMediaViewer(button) {
+      var mediaViewerGroup = '';
+      var mediaViewerIndex = 0;
+      var mediaCursorPositions = [];
+      function moveCursorIntoMediaDialog(dialog) {
+        if (mediaCursorPositions.length) return;
+        var cursor = document.getElementById('customCursor');
+        var nodes = [cursor].concat(Array.from(document.querySelectorAll('.cursor-trail-dot'))).filter(Boolean);
+        nodes.forEach(function (node) {
+          var parent = node.parentNode;
+          if (!parent || parent === dialog) return;
+          var placeholder = document.createComment('cursor original position');
+          parent.insertBefore(placeholder, node);
+          mediaCursorPositions.push({ node: node, placeholder: placeholder });
+          dialog.appendChild(node);
+        });
+      }
+      function restoreCursorFromMediaDialog() {
+        mediaCursorPositions.forEach(function (entry) {
+          var marker = entry.placeholder;
+          if (marker.parentNode) {
+            marker.parentNode.insertBefore(entry.node, marker);
+            marker.parentNode.removeChild(marker);
+          }
+        });
+        mediaCursorPositions = [];
+      }
+      function mediaViewerButtons() {
+        var group = document.getElementById(mediaViewerGroup);
+        return group ? Array.from(group.querySelectorAll('.media-trigger')) : [];
+      }
+      function displayMediaViewerButton(button) {
+        if (!button) return;
         var source = button.querySelector('img');
-        if (!source) return;
-        var caption = button.closest('.media').querySelector('p'),
-          dialog = document.getElementById('mediaDialog'),
-          largeImage = document.getElementById('mediaDialogImage');
+        var caption = button.closest('.media').querySelector('p');
+        var largeImage = document.getElementById('mediaDialogImage');
+        if (!source || !caption || !largeImage) return;
         largeImage.src = source.currentSrc || source.src;
         largeImage.alt = source.alt;
-        var englishTitle = caption.querySelector('.en'),
-          chineseTitle = caption.querySelector('.zh');
-        dialog.querySelector('#mediaDialogTitle .en').textContent = englishTitle ? englishTitle.textContent : source.alt;
-        dialog.querySelector('#mediaDialogTitle .zh').textContent = chineseTitle ? chineseTitle.textContent : source.alt;
-        dialog.showModal();
+        var englishTitle = caption.querySelector('.en');
+        var chineseTitle = caption.querySelector('.zh');
+        mediaDialog.querySelector('#mediaDialogTitle .en').textContent = englishTitle ? englishTitle.textContent : source.alt;
+        mediaDialog.querySelector('#mediaDialogTitle .zh').textContent = chineseTitle ? chineseTitle.textContent : source.alt;
+      }
+      function openMediaViewer(button) {
+        if (!button) return;
+        mediaViewerGroup = button.dataset.mediaGallery || (button.closest('.media').parentElement && button.closest('.media').parentElement.id);
+        mediaViewerIndex = Number(button.dataset.mediaIndex || 0);
+        displayMediaViewerButton(button);
+        if (!mediaDialog.open) {
+          moveCursorIntoMediaDialog(mediaDialog);
+          mediaDialog.showModal();
+        }
         applyLanguage();
       }
+      function moveMediaViewer(direction) {
+        var buttons = mediaViewerButtons();
+        if (!buttons.length) return;
+        mediaViewerIndex = (mediaViewerIndex + direction + buttons.length) % buttons.length;
+        displayMediaViewerButton(buttons[mediaViewerIndex]);
+      }
       function closeMediaViewer() {
-        document.getElementById('mediaDialog').close();
+        if (mediaDialog.open) mediaDialog.close();
       }
       var mediaDialog = document.getElementById('mediaDialog');
       mediaDialog.addEventListener('click', function (event) {
         if (event.target === mediaDialog) closeMediaViewer();
       });
+      mediaDialog.addEventListener('close', restoreCursorFromMediaDialog);
+      mediaDialog.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); moveMediaViewer(-1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); moveMediaViewer(1); }
+      });
       function renderMedia(id, data) {
         var zh = document.documentElement.dataset.lang === 'zh';
         document.getElementById(id).innerHTML = data
-          .map(function (x) {
+          .map(function (x, index) {
             var useChinese = zh && x[4];
             var url = useChinese ? x[4] : x[2];
             var localName = x[1];
@@ -4897,7 +5014,7 @@
             return (
               '<article class="media' +
               extra +
-              '"><button class="media-trigger" type="button" onclick="openMediaViewer(this)" aria-haspopup="dialog" aria-label="' +
+              '"><button class="media-trigger" type="button" data-media-gallery="' + esc(id) + '" data-media-index="' + index + '" onclick="openMediaViewer(this)" aria-haspopup="dialog" aria-label="' +
               esc(zh ? (x[3] || x[0]) : x[0]) +
               '">' +
               image(local, url, x[0], x[3], true) +
@@ -5269,6 +5386,12 @@
         document.querySelectorAll('.zh').forEach(function (e) {
           e.hidden = !zh;
         });
+        var careerGuideImage = document.getElementById('careerGuideImage');
+        if (careerGuideImage) {
+          var guideSource = zh ? 'career-path-chinese.png' : 'career-path-english.svg';
+          if (careerGuideImage.getAttribute('src') !== guideSource) careerGuideImage.setAttribute('src', guideSource);
+          careerGuideImage.alt = zh ? '就業與創業職涯方向圖' : 'English career guide for employment and entrepreneurship';
+        }
         document.documentElement.lang = zh ? 'zh-Hant' : 'en';
         document.title = zh
           ? '慈濟大學經營管理學系'
@@ -5572,6 +5695,10 @@
           document.documentElement.dataset.lang === 'en' ? 'zh' : 'en';
         renderMedia('introMedia', intro);
         renderMedia('studentMedia', student);
+        if (mediaDialog && mediaDialog.open) {
+          var buttons = mediaViewerButtons();
+          displayMediaViewerButton(buttons[mediaViewerIndex]);
+        }
         applyLanguage();
         renderForum();
       }
@@ -5784,6 +5911,49 @@
         }, true);
         window.addEventListener('blur', hideCursor);
       }
+      function setupSiteLoader() {
+        var loader = document.getElementById('siteLoader');
+        var bar = document.getElementById('siteLoaderBar');
+        var percentLabel = document.getElementById('siteLoaderPercent');
+        var progressbar = loader && loader.querySelector('[role="progressbar"]');
+        if (!loader || !bar || !percentLabel || !progressbar) return;
+        var progress = 0;
+        var finished = false;
+        function paint() {
+          var rounded = Math.min(100, Math.round(progress));
+          bar.style.width = rounded + '%';
+          percentLabel.textContent = String(rounded);
+          progressbar.setAttribute('aria-valuenow', String(rounded));
+        }
+        var timer = window.setInterval(function () {
+          if (progress < 93) {
+            progress = Math.min(93, progress + Math.max(.35, (93 - progress) * .026));
+            paint();
+          }
+        }, 42);
+        function complete() {
+          if (finished) return;
+          finished = true;
+          window.clearInterval(timer);
+          var finishTimer = window.setInterval(function () {
+            progress = Math.min(100, progress + 3.5);
+            paint();
+            if (progress >= 100) {
+              window.clearInterval(finishTimer);
+              window.setTimeout(function () {
+                loader.classList.add('is-complete');
+                document.body.classList.remove('loading-screen-active');
+                document.body.removeAttribute('aria-busy');
+                window.setTimeout(function () { loader.hidden = true; }, 440);
+              }, 180);
+            }
+          }, 24);
+        }
+        window.addEventListener('load', complete, { once: true });
+        window.setTimeout(complete, 18000);
+        if (document.readyState === 'complete') complete();
+      }
+      setupSiteLoader();
       setupPageScrollEffects();
       setupCustomCursor();
     </script>
