@@ -1377,7 +1377,7 @@
       }
       .career-art {
         margin: 20px auto 28px;
-        max-width: 1000px;
+        max-width: 1160px;
       }
       .career-art figure {
         margin: 0;
@@ -2569,22 +2569,71 @@
         }
       }
 
+      .media-trigger {
+        display: block; width: 100%; padding: 0; border: 0; background: transparent;
+        color: inherit; text-align: left; cursor: zoom-in;
+      }
+      .media-trigger .pic { display: block; }
+      .media-trigger:focus-visible { outline: 3px solid #bd6847; outline-offset: 3px; }
+      .media-trigger img { transition: transform 420ms cubic-bezier(.2,.75,.25,1), filter 420ms ease; }
+      .media-trigger:hover img, .media-trigger:focus-visible img { transform: scale(1.025); filter: saturate(1.08); }
+      .media-dialog {
+        position: fixed; width: min(1120px, calc(100vw - 32px)); max-width: none;
+        max-height: min(820px, calc(100dvh - 32px)); padding: 0; overflow: auto;
+        border: 1px solid #b9cec0; background: #f4f7f2; color: var(--ink);
+        box-shadow: 0 30px 100px #071b1680;
+      }
+      .media-dialog::backdrop { background: #102a25d9; backdrop-filter: blur(4px); }
+      .media-dialog-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .8fr); min-height: min(620px, calc(100dvh - 34px)); }
+      .media-dialog-visual { display: grid; place-items: center; min-height: 400px; padding: 20px; background: #e4ece5; }
+      .media-dialog-visual img { display: block; max-width: 100%; max-height: min(76dvh, 780px); object-fit: contain; }
+      .media-dialog-copy { position: relative; display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 4vw, 50px); }
+      .media-dialog-close { position: absolute; top: 18px; right: 20px; border: 0; border-bottom: 1px solid #9bb7a2; background: transparent; color: var(--green); padding: 5px 0; font-weight: 700; cursor: pointer; }
+      .media-dialog-kicker { margin: 0 0 13px; color: #bd6847; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      .media-dialog-copy h2 { margin: 0; padding: 0 0 18px; border-bottom: 1px solid #c5d4c8; color: var(--green); font: 700 clamp(26px, 3vw, 38px)/1.2 Georgia, 'Noto Serif TC', serif; }
+      .media-dialog-help { margin: 18px 0 0; color: #66766d; font-size: 14px; line-height: 1.7; }
+      .forum-auth-panel { margin: 0 0 24px; padding: 0 0 20px; border-bottom: 1px solid var(--line); }
+      .forum-auth-panel > h3 { margin: 0; color: var(--green); font-size: 16px; }
+      .forum-auth-intro { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+      .forum-auth-form { display: grid; gap: 2px; }
+      .forum-auth-form input[type='email'], .forum-auth-form input[type='password'] { width: 100%; border: 1px solid #cfcbbf; background: #fff; color: var(--ink); padding: 10px 11px; border-radius: 0; font-size: 14px; }
+      .forum-auth-form input:focus { border-color: var(--green); outline: 2px solid #c89a5140; outline-offset: 1px; }
+      .forum-auth-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+      .forum-auth-secondary { border: 1px solid #8ea995; border-left: 3px solid #bd6847; background: transparent; color: var(--green); padding: 9px 13px; font-size: 12px; font-weight: 750; cursor: pointer; }
+      .forum-auth-secondary:hover { background: #e7efe7; }
+      .forum-auth-status { min-height: 1.5em; margin: 10px 0 0; color: #4e6957; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+      .forum-delete-button { margin-top: 12px; border: 0; border-bottom: 1px solid #bd6847; background: transparent; color: #8b4d36; padding: 4px 0; font-size: 11px; font-weight: 750; cursor: pointer; }
+      .forum-delete-button:hover { color: #602d20; }
+      .forum-reply-item .forum-delete-button { margin-top: 7px; }
+      .forum-auth-panel [hidden] { display: none !important; }
+      @media (max-width: 700px) {
+        .media-dialog-layout { grid-template-columns: 1fr; }
+        .media-dialog-visual { min-height: 36vh; padding: 14px; }
+        .media-dialog-visual img { max-height: 52dvh; }
+        .media-dialog-copy { min-height: 185px; padding: 26px 22px 30px; }
+        .media-dialog-close { top: 12px; right: 16px; }
+      }
+
       /* Keep faculty cards landscape; center and enlarge only the professor name. */
       .faculty-summary {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
         align-items: center;
         text-align: center;
       }
       .faculty-summary .role { width: 100%; text-align: center; }
       .faculty-summary h3 {
         width: 100%;
-        margin: 8px 0 18px;
+        align-self: center;
+        margin: 16px 0 0;
+        transform: translateY(9px);
         font-size: clamp(23px, 2.35vw, 28px);
         line-height: 1.16;
         text-align: center;
       }
       .faculty-open { text-align: left; }
       @media (max-width: 760px) {
-        .faculty-summary h3 { font-size: clamp(20px, 5.3vw, 23px); }
+        .faculty-summary h3 { margin-top: 10px; transform: translateY(5px); font-size: clamp(20px, 5.3vw, 23px); }
       }
       @media (prefers-reduced-motion: reduce) {
         .hero-scroll-cue .arrow { animation: none !important; }
@@ -3071,7 +3120,7 @@
                 alt="Tzu Chi University library"
                 data-alt-en="Tzu Chi University library"
                 data-alt-zh="慈濟大學圖書館"
-                loading="eager"
+                loading="lazy"
               />
               <figcaption>
                 <span class="en">A place to read, research and reflect</span
@@ -3084,7 +3133,7 @@
                 alt="Academic building on the Tzu Chi University campus"
                 data-alt-en="Academic building on the Tzu Chi University campus"
                 data-alt-zh="慈濟大學校園教學建築"
-                loading="eager"
+                loading="lazy"
               />
               <figcaption>
                 <span class="en">Learning across the campus</span
@@ -3093,11 +3142,11 @@
             </figure>
             <figure class="home-photo" role="group" aria-roledescription="slide" aria-label="Photo 4 of 5">
               <img
-                src="home-SP04.png"
+                src="home-SP04.webp"
                 alt="Student studying independently at a campus study desk"
                 data-alt-en="Student studying independently at a campus study desk"
                 data-alt-zh="學生在校園自習空間專心學習"
-                loading="eager"
+                loading="lazy"
               />
               <figcaption>
                 <span class="en">Room for focused study</span
@@ -3106,11 +3155,11 @@
             </figure>
             <figure class="home-photo" role="group" aria-roledescription="slide" aria-label="Photo 5 of 5">
               <img
-                src="home-SP05.jpg"
+                src="home-SP05.webp"
                 alt="Tzu Chi University library reading space"
                 data-alt-en="Tzu Chi University library reading space"
                 data-alt-zh="慈濟大學圖書館閱覽空間"
-                loading="eager"
+                loading="lazy"
               />
               <figcaption>
                 <span class="en">Library</span><span class="zh" hidden>圖書館</span>
@@ -3515,10 +3564,9 @@
           <p>
             <span class="en"
               >These official images load from the department site when online. Download the linked
-              images into <code>images/official/</code> beside this HTML for offline viewing.</span
+              images into the same folder as this HTML for offline viewing.</span
             ><span class="zh" hidden
-              >連線時可由系所網站載入官方圖片。若要離線瀏覽，請下載連結中的圖片並存入與 HTML 同層的
-              <code>images/official/</code> 資料夾。</span
+              >連線時可由系所網站載入官方圖片。若要離線瀏覽，請下載連結中的圖片並存入與 index.html 相同的資料夾。</span
             >
           </p>
           <ul id="assetList"></ul>
@@ -3760,20 +3808,36 @@
           ><span class="zh" hidden>與系所師生分享問題、公告與想法。</span>
         </p>
         <div class="forum-local-note">
-          <strong
-            ><span class="en">Posting note:</span><span class="zh" hidden>貼文說明：</span></strong
-          >
-          <span class="en"
-            >This file stores posts in the current browser only, so other users will not see them.
-            Names are self-entered and not verified. A shared forum needs a server and
-            moderation.</span
-          ><span class="zh" hidden
-            >此檔案的貼文只存在目前的瀏覽器，其他使用者看不到。姓名由發文者自行填寫，未經查證。若要跨裝置共同使用，需建置伺服器與管理機制。</span
-          >
-          <div id="forumStorageStatus" class="forum-storage-status"></div>
+          <strong><span class="en">School community forum:</span><span class="zh" hidden>校內師生討論區：</span></strong>
+          <span class="en">Sign in with a verified @gms.tcu.edu.tw account to post. You may choose to post anonymously. Your account stays private.</span>
+          <span class="zh" hidden>請使用已驗證的 @gms.tcu.edu.tw 帳號登入後發文。可選擇匿名，帳號資訊不會公開顯示。</span>
+          <div id="forumStorageStatus" class="forum-storage-status" role="status" aria-live="polite"></div>
         </div>
         <div class="forum-layout">
           <section class="forum-compose" aria-labelledby="forumComposeTitle">
+            <div class="forum-auth-panel">
+              <h3><span class="en">School account</span><span class="zh" hidden>校園帳號</span></h3>
+              <p class="forum-auth-intro">
+                <span class="en">Use your TCU GMS email address. New users can set a password when they register.</span>
+                <span class="zh" hidden>請使用慈濟大學 GMS 電子郵件。新使用者可於註冊時自行設定密碼。</span>
+              </p>
+              <form id="forumAuthForm" class="forum-form forum-auth-form">
+                <label class="forum-field">
+                  <span><span class="en">School email</span><span class="zh" hidden>校園電子郵件</span></span>
+                  <input id="forumAccountEmail" type="email" autocomplete="username" inputmode="email" required placeholder="name@gms.tcu.edu.tw" />
+                </label>
+                <label class="forum-field">
+                  <span><span class="en">Password</span><span class="zh" hidden>密碼</span></span>
+                  <input id="forumAccountPassword" type="password" autocomplete="current-password" minlength="8" required />
+                </label>
+                <div class="forum-auth-actions">
+                  <button class="forum-submit" type="submit"><span class="en">Sign in</span><span class="zh" hidden>登入</span></button>
+                  <button class="forum-auth-secondary" id="forumSignUp" type="button"><span class="en">Create account</span><span class="zh" hidden>建立帳號</span></button>
+                  <button class="forum-auth-secondary" id="forumSignOut" type="button" hidden><span class="en">Sign out</span><span class="zh" hidden>登出</span></button>
+                </div>
+              </form>
+              <p id="forumAuthStatus" class="forum-auth-status" role="status" aria-live="polite"></p>
+            </div>
             <h3 id="forumComposeTitle">
               <span class="en">Start a discussion</span><span class="zh" hidden>發起討論</span>
             </h3>
@@ -3781,11 +3845,11 @@
               <label class="forum-field"
                 ><span><span class="en">Category</span><span class="zh" hidden>分類</span></span
                 ><select id="forumCategory" required>
-                  <option value="general">General questions</option>
-                  <option value="courses">Courses &amp; study</option>
-                  <option value="internships">Internships &amp; careers</option>
-                  <option value="events">Events &amp; notices</option>
-                  <option value="ideas">Ideas &amp; feedback</option>
+                  <option value="general" data-en="General questions" data-zh="一般提問">General questions</option>
+                  <option value="courses" data-en="Courses &amp; study" data-zh="課程與學習">Courses &amp; study</option>
+                  <option value="internships" data-en="Internships &amp; careers" data-zh="實習與職涯">Internships &amp; careers</option>
+                  <option value="events" data-en="Events &amp; notices" data-zh="活動與公告">Events &amp; notices</option>
+                  <option value="ideas" data-en="Ideas &amp; feedback" data-zh="想法與回饋">Ideas &amp; feedback</option>
                 </select></label
               >
               <label class="forum-field"
@@ -3893,6 +3957,17 @@
         </div>
       </div>
     </dialog>
+    <dialog class="media-dialog" id="mediaDialog" aria-labelledby="mediaDialogTitle">
+      <div class="media-dialog-layout">
+        <div class="media-dialog-visual"><img id="mediaDialogImage" src="" alt="" /></div>
+        <div class="media-dialog-copy">
+          <button class="media-dialog-close" type="button" onclick="closeMediaViewer()"><span class="en">Close</span><span class="zh" hidden>關閉</span> ×</button>
+          <p class="media-dialog-kicker"><span class="en">Department introduction</span><span class="zh" hidden>系所簡介</span></p>
+          <h2 id="mediaDialogTitle"><span class="en"></span><span class="zh" hidden></span></h2>
+          <p class="media-dialog-help"><span class="en">Select another image to explore more department information.</span><span class="zh" hidden>點選其他圖片可瀏覽更多系所資訊。</span></p>
+        </div>
+      </div>
+    </dialog>
 
     <footer class="site-footer">
       <div class="foot">
@@ -3921,6 +3996,7 @@
     <span class="cursor-trail-dot" id="cursorTrail3" aria-hidden="true"></span>
     <span class="cursor-trail-dot" id="cursorTrail4" aria-hidden="true"></span>
     <span class="cursor-trail-dot" id="cursorTrail5" aria-hidden="true"></span>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
       const origin = 'https://mdm.tcu.edu.tw';
       const news = [
@@ -4680,9 +4756,10 @@
           return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
         });
       }
-      function image(local, url, alt, altZh) {
+      function image(local, url, alt, altZh, inline) {
+        var wrapper = inline ? 'span' : 'div';
         return (
-          '<div class="pic"><img src="' +
+          '<' + wrapper + ' class="pic"><img src="' +
           esc(local) +
           '" data-url="' +
           esc(url || '') +
@@ -4692,7 +4769,7 @@
           esc(altZh || alt || '') +
           '" alt="' +
           esc(alt || '') +
-          '" onerror="fallback(this)"></div>'
+          '" onerror="fallback(this)"></' + wrapper + '>'
         );
       }
       function fallback(img) {
@@ -4813,6 +4890,28 @@
       function returnToNews() {
         go('news');
       }
+      function openMediaViewer(button) {
+        var source = button.querySelector('img');
+        if (!source) return;
+        var caption = button.closest('.media').querySelector('p'),
+          dialog = document.getElementById('mediaDialog'),
+          largeImage = document.getElementById('mediaDialogImage');
+        largeImage.src = source.currentSrc || source.src;
+        largeImage.alt = source.alt;
+        var englishTitle = caption.querySelector('.en'),
+          chineseTitle = caption.querySelector('.zh');
+        dialog.querySelector('#mediaDialogTitle .en').textContent = englishTitle ? englishTitle.textContent : source.alt;
+        dialog.querySelector('#mediaDialogTitle .zh').textContent = chineseTitle ? chineseTitle.textContent : source.alt;
+        dialog.showModal();
+        applyLanguage();
+      }
+      function closeMediaViewer() {
+        document.getElementById('mediaDialog').close();
+      }
+      var mediaDialog = document.getElementById('mediaDialog');
+      mediaDialog.addEventListener('click', function (event) {
+        if (event.target === mediaDialog) closeMediaViewer();
+      });
       function renderMedia(id, data) {
         var zh = document.documentElement.dataset.lang === 'zh';
         document.getElementById(id).innerHTML = data
@@ -4824,14 +4923,16 @@
               var ext = (url.match(/\.(?:jpe?g|png|gif|webp)(?=\?|$)/i) || [])[0] || '.jpg';
               localName = localName.replace(/\.[^.]+$/, '-zh') + ext;
             }
-            var local = useChinese ? url : 'images/official/' + localName;
+            var local = localName;
             var extra = x[1] === 'history.png' ? ' history-media' : '';
             return (
               '<article class="media' +
               extra +
+              '"><button class="media-trigger" type="button" onclick="openMediaViewer(this)" aria-haspopup="dialog" aria-label="' +
+              esc(zh ? (x[3] || x[0]) : x[0]) +
               '">' +
-              image(local, url, x[0], x[3]) +
-              '<p><span class="en">' +
+              image(local, url, x[0], x[3], true) +
+              '</button><p><span class="en">' +
               esc(x[0]) +
               '</span><span class="zh" hidden>' +
               esc(x[3] || x[0]) +
@@ -4938,6 +5039,8 @@
         var image = campusCarousel.slides[index].querySelector('img'),
           requestId = ++campusCarousel.requestId;
         if (!image) return;
+        image.loading = 'eager';
+        image.fetchPriority = 'high';
         campusCarousel.pendingIndex = index;
         campusCarousel.track.setAttribute('aria-busy', 'true');
         waitForCampusImage(image).then(function (loaded) {
@@ -4972,9 +5075,9 @@
           slide.setAttribute('aria-label', 'Photo ' + (index + 1) + ' of ' + campusCarousel.count);
           var image = slide.querySelector('img');
           if (image) {
-            image.loading = 'eager';
+            image.loading = index === 0 ? 'eager' : 'lazy';
             image.decoding = 'async';
-            image.fetchPriority = 'high';
+            image.fetchPriority = index === 0 ? 'high' : 'low';
           }
         });
         var dots = document.getElementById('campusDots');
@@ -5201,6 +5304,9 @@
         document.title = zh
           ? '慈濟大學經營管理學系'
           : 'Department of Business Management | Tzu Chi University';
+        document.querySelectorAll('#forumCategory option').forEach(function (option) {
+          option.textContent = zh ? option.dataset.zh : option.dataset.en;
+        });
         var input = document.getElementById('query');
         if (input) {
           input.placeholder = zh ? '搜尋本網站' : 'Search this site';
@@ -5253,243 +5359,231 @@
         });
       }
 
-      var forumStorageKey = 'tcuBusinessManagementForumV1';
+      var SUPABASE_URL = 'PASTE_YOUR_SUPABASE_PROJECT_URL_HERE';
+      var SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
+      var forumClient = null;
+      var forumSession = null;
       var forumPosts = [];
-      var forumStorageReady = true;
-      function forumIsZh() {
-        return document.documentElement.dataset.lang === 'zh';
-      }
-      function forumT(en, zh) {
-        return forumIsZh() ? zh : en;
-      }
+      var forumAuthMessage = null;
+      function forumIsZh() { return document.documentElement.dataset.lang === 'zh'; }
+      function forumT(en, zh) { return forumIsZh() ? zh : en; }
       function forumCategoryName(key) {
-        var names = {
-          general: ['General questions', '一般提問'],
-          courses: ['Courses & study', '課程與學習'],
-          internships: ['Internships & careers', '實習與職涯'],
-          events: ['Events & notices', '活動與公告'],
-          ideas: ['Ideas & feedback', '想法與回饋'],
-        };
+        var names = { general: ['General questions', '一般提問'], courses: ['Courses & study', '課程與學習'], internships: ['Internships & careers', '實習與職涯'], events: ['Events & notices', '活動與公告'], ideas: ['Ideas & feedback', '想法與回饋'] };
         var item = names[key] || names.general;
         return forumIsZh() ? item[1] : item[0];
       }
       function forumDate(value) {
         var date = new Date(value);
         if (isNaN(date.getTime())) return '';
-        try {
-          return new Intl.DateTimeFormat(forumIsZh() ? 'zh-Hant-TW' : 'en-US', {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-          }).format(date);
-        } catch (e) {
-          return date.toLocaleString();
-        }
+        try { return new Intl.DateTimeFormat(forumIsZh() ? 'zh-Hant-TW' : 'en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(date); }
+        catch (e) { return date.toLocaleString(); }
       }
-      function forumAuthor(item) {
-        return item.anonymous ? forumT('Anonymous', '匿名') : item.author;
+      function forumAuthor(item) { return item.anonymous ? forumT('Anonymous', '匿名') : (item.display_name || forumT('TCU member', '慈大成員')); }
+      function forumIsSchoolEmail(email) { return /^[^@\s]+@gms\.tcu\.edu\.tw$/i.test(String(email || '').trim()); }
+      function forumSetMessage(en, zh) {
+        forumAuthMessage = [en, zh];
+        var node = document.getElementById('forumAuthStatus');
+        if (node) node.textContent = forumT(en, zh);
       }
-      function readForumPosts() {
-        try {
-          var saved = localStorage.getItem(forumStorageKey);
-          var parsed = saved ? JSON.parse(saved) : [];
-          forumPosts = Array.isArray(parsed) ? parsed : [];
-        } catch (e) {
-          forumPosts = [];
-          forumStorageReady = false;
-        }
+      function updateForumAuthUI() {
+        var emailInput = document.getElementById('forumAccountEmail'),
+          passwordInput = document.getElementById('forumAccountPassword'),
+          signIn = document.querySelector('#forumAuthForm button[type="submit"]'),
+          signUp = document.getElementById('forumSignUp'),
+          signOut = document.getElementById('forumSignOut'),
+          signedIn = Boolean(forumSession && forumSession.user);
+        if (emailInput) emailInput.disabled = signedIn;
+        if (passwordInput) passwordInput.disabled = signedIn;
+        if (signIn) signIn.hidden = signedIn;
+        if (signUp) signUp.hidden = signedIn;
+        if (signOut) signOut.hidden = !signedIn;
+        if (signedIn) forumSetMessage('Signed in as ' + forumSession.user.email + '.', '已登入：' + forumSession.user.email);
+        else if (forumAuthMessage) forumSetMessage(forumAuthMessage[0], forumAuthMessage[1]);
+        else if (!forumClient) forumSetMessage('Connect the Supabase project using the included setup guide to enable sign-in and shared posts.', '請依隨附設定說明連結 Supabase 專案，以啟用登入與跨裝置共用貼文。');
+        else forumSetMessage('Sign in with a verified @gms.tcu.edu.tw account to post.', '請使用已驗證的 @gms.tcu.edu.tw 帳號登入後發文。');
+        var form = document.getElementById('forumForm');
+        if (form) form.querySelectorAll('input, select, textarea, button').forEach(function (control) { control.disabled = !signedIn; });
       }
-      function saveForumPosts() {
-        try {
-          localStorage.setItem(forumStorageKey, JSON.stringify(forumPosts));
-          forumStorageReady = true;
-        } catch (e) {
-          forumStorageReady = false;
-        }
+      function forumCanDelete(item) {
+        if (!forumSession || !forumSession.user) return false;
+        return item.author_id === forumSession.user.id || String(forumSession.user.email || '').toLowerCase() === '113114202@gms.tcu.edu.tw';
       }
-      function appendForumText(parent, tag, className, text) {
-        var node = document.createElement(tag);
-        if (className) node.className = className;
-        node.textContent = text;
-        parent.appendChild(node);
-        return node;
+      function forumDeleteButton(kind, id, item) {
+        if (!forumCanDelete(item)) return null;
+        var isAdmin = String(forumSession.user.email || '').toLowerCase() === '113114202@gms.tcu.edu.tw' && item.author_id !== forumSession.user.id,
+          button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'forum-delete-button';
+        button.textContent = isAdmin ? forumT('Delete as administrator', '管理員刪除') : forumT('Delete your post', '刪除自己的貼文');
+        button.setAttribute('aria-label', forumT('Delete this post', '刪除此貼文'));
+        button.addEventListener('click', function () { deleteForumItem(kind, id); });
+        return button;
+      }
+      async function deleteForumItem(kind, id) {
+        if (!forumClient || !window.confirm(forumT('Delete this post?', '確定刪除此貼文？'))) return;
+        var table = kind === 'reply' ? 'forum_replies' : 'forum_posts',
+          result = await forumClient.from(table).delete().eq('id', id);
+        if (result.error) { forumSetMessage('Delete failed. Check your connection and access rights.', '刪除失敗，請檢查連線與權限。'); return; }
+        await loadForumPosts();
       }
       function addReplyForm(details, thread) {
         var summary = document.createElement('summary');
         summary.textContent = forumT('Reply to this discussion', '回覆此討論');
         details.appendChild(summary);
+        if (!forumSession || !forumSession.user) {
+          appendForumText(details, 'p', 'forum-auth-intro', forumT('Sign in with your school account to reply.', '請登入校園帳號後回覆.'));
+          return;
+        }
         var form = document.createElement('form');
         form.className = 'forum-reply-form';
         form.dataset.threadId = thread.id;
-        form.innerHTML =
-          '<label><span>' +
-          forumT('Reply', '回覆') +
-          '</span><textarea name="body" maxlength="1000" required placeholder="' +
-          forumT('Write a reply', '輸入回覆') +
-          '"></textarea></label><label class="forum-identity"><input type="checkbox" name="anonymous" checked><span>' +
-          forumT('Reply anonymously', '匿名回覆') +
-          '</span></label><label class="forum-name-row" hidden><span>' +
-          forumT('Display name', '顯示姓名') +
-          '</span><input type="text" name="author" maxlength="60" placeholder="' +
-          forumT('Name shown with your reply', '回覆時顯示的姓名') +
-          '"></label><button type="submit" class="forum-reply-submit">' +
-          forumT('Post reply', '發布回覆') +
-          '</button>';
+        form.innerHTML = '<label><span>' + forumT('Reply', '回覆') + '</span><textarea name="body" maxlength="1000" required placeholder="' + forumT('Write a reply', '輸入回覆') + '"></textarea></label><label class="forum-identity"><input type="checkbox" name="anonymous" checked><span>' + forumT('Reply anonymously', '匿名回覆') + '</span></label><label class="forum-name-row" hidden><span>' + forumT('Display name', '顯示姓名') + '</span><input type="text" name="author" maxlength="60" placeholder="' + forumT('Name shown with your reply', '回覆時顯示的姓名') + '"></label><button type="submit" class="forum-reply-submit">' + forumT('Post reply', '發布回覆') + '</button>';
         details.appendChild(form);
       }
       function renderForum() {
         var feed = document.getElementById('forumFeed');
         if (!feed) return;
+        updateForumAuthUI();
         feed.replaceChildren();
         var count = document.getElementById('forumPostCount');
-        if (count)
-          count.textContent =
-            forumPosts.length +
-            ' ' +
-            forumT(forumPosts.length === 1 ? 'topic' : 'topics', '個討論串');
+        if (count) count.textContent = forumPosts.length + ' ' + forumT(forumPosts.length === 1 ? 'topic' : 'topics', '個討論串');
         var note = document.getElementById('forumStorageStatus');
-        if (note)
-          note.textContent = forumStorageReady
-            ? forumT(
-                'Saved in this browser only. Other visitors will not see these posts.',
-                '貼文僅儲存在此瀏覽器，其他訪客不會看到。',
-              )
-            : forumT(
-                'Browser storage is unavailable; posts may be lost when this page closes.',
-                '此瀏覽器無法使用儲存空間，關閉頁面後貼文可能消失。',
-              );
+        if (note) note.textContent = forumT('Posts are shared with visitors of this website.', '貼文會與本網站訪客共用。');
         if (!forumPosts.length) {
-          appendForumText(
-            feed,
-            'div',
-            'forum-empty',
-            forumT(
-              'No discussions yet. Start one with the form.',
-              '目前尚無討論串，歡迎使用表單發起討論。',
-            ),
-          );
+          appendForumText(feed, 'div', 'forum-empty', forumT(forumClient ? 'No discussions yet. Start one with your school account.' : 'The shared discussion board will appear here after its Supabase project is connected.', forumClient ? '目前尚無討論串，歡迎使用校園帳號發起討論。' : '連結 Supabase 專案後，將在此顯示共用討論區。'));
           return;
         }
-        forumPosts
-          .slice()
-          .sort(function (a, b) {
-            return new Date(b.createdAt) - new Date(a.createdAt);
-          })
-          .forEach(function (post) {
-            var article = document.createElement('article');
-            article.className = 'forum-thread';
-            appendForumText(article, 'h4', '', post.title);
-            appendForumText(
-              article,
-              'div',
-              'forum-meta',
-              forumAuthor(post) +
-                ' · ' +
-                forumCategoryName(post.category) +
-                ' · ' +
-                forumDate(post.createdAt),
-            );
-            appendForumText(article, 'p', 'forum-message', post.body);
-            var replies = Array.isArray(post.replies) ? post.replies : [];
-            if (replies.length) {
-              var list = document.createElement('div');
-              list.className = 'forum-replies';
-              replies
-                .slice()
-                .sort(function (a, b) {
-                  return new Date(a.createdAt) - new Date(b.createdAt);
-                })
-                .forEach(function (reply) {
-                  var item = document.createElement('div');
-                  item.className = 'forum-reply-item';
-                  appendForumText(
-                    item,
-                    'div',
-                    'forum-meta',
-                    forumAuthor(reply) + ' · ' + forumDate(reply.createdAt),
-                  );
-                  appendForumText(item, 'p', '', reply.body);
-                  list.appendChild(item);
-                });
-              article.appendChild(list);
-            }
-            var details = document.createElement('details');
-            details.className = 'forum-reply';
-            addReplyForm(details, post);
-            article.appendChild(details);
-            feed.appendChild(article);
-          });
+        forumPosts.forEach(function (post) {
+          var article = document.createElement('article');
+          article.className = 'forum-thread';
+          appendForumText(article, 'h4', '', post.title);
+          appendForumText(article, 'div', 'forum-meta', forumAuthor(post) + ' · ' + forumCategoryName(post.category) + ' · ' + forumDate(post.created_at));
+          appendForumText(article, 'p', 'forum-message', post.body);
+          var deletePost = forumDeleteButton('post', post.id, post);
+          if (deletePost) article.appendChild(deletePost);
+          var replies = Array.isArray(post.forum_replies) ? post.forum_replies.slice() : [];
+          if (replies.length) {
+            var list = document.createElement('div');
+            list.className = 'forum-replies';
+            replies.sort(function (a, b) { return new Date(a.created_at) - new Date(b.created_at); });
+            replies.forEach(function (reply) {
+              var item = document.createElement('div');
+              item.className = 'forum-reply-item';
+              appendForumText(item, 'div', 'forum-meta', forumAuthor(reply) + ' · ' + forumDate(reply.created_at));
+              appendForumText(item, 'p', '', reply.body);
+              var deleteReply = forumDeleteButton('reply', reply.id, reply);
+              if (deleteReply) item.appendChild(deleteReply);
+              list.appendChild(item);
+            });
+            article.appendChild(list);
+          }
+          var details = document.createElement('details');
+          details.className = 'forum-reply';
+          addReplyForm(details, post);
+          article.appendChild(details);
+          feed.appendChild(article);
+        });
       }
-      function syncForumName(checkbox, row, input) {
-        row.hidden = checkbox.checked;
-        input.required = !checkbox.checked;
+      async function loadForumPosts() {
+        if (!forumClient) { forumPosts = []; renderForum(); return; }
+        var note = document.getElementById('forumStorageStatus');
+        if (note) note.textContent = forumT('Loading shared discussions…', '正在載入共用討論串…');
+        var result = await forumClient.from('forum_posts').select('id, author_id, category, title, body, anonymous, display_name, created_at, forum_replies(id, author_id, body, anonymous, display_name, created_at)').order('created_at', { ascending: false });
+        if (result.error) {
+          forumPosts = [];
+          renderForum();
+          if (note) note.textContent = forumT('Could not load the shared forum. Confirm that the SQL setup and public read policy are installed.', '無法載入共用討論區，請確認已安裝 SQL 設定與公開讀取政策。');
+          return;
+        }
+        forumPosts = result.data || [];
+        renderForum();
       }
+      function forumDisplayName(anonymous, input) { return anonymous ? null : input.value.trim(); }
       function initForum() {
-        readForumPosts();
         var form = document.getElementById('forumForm'),
           anonymous = document.getElementById('forumAnonymous'),
           nameRow = document.getElementById('forumNameRow'),
           name = document.getElementById('forumName'),
-          feed = document.getElementById('forumFeed');
+          feed = document.getElementById('forumFeed'),
+          authForm = document.getElementById('forumAuthForm');
         syncForumName(anonymous, nameRow, name);
-        anonymous.addEventListener('change', function () {
-          syncForumName(anonymous, nameRow, name);
-        });
-        form.addEventListener('submit', function (event) {
+        anonymous.addEventListener('change', function () { syncForumName(anonymous, nameRow, name); });
+        if (window.supabase && window.supabase.createClient && /^https:/i.test(SUPABASE_URL) && !SUPABASE_URL.includes('PASTE_') && SUPABASE_PUBLISHABLE_KEY && !SUPABASE_PUBLISHABLE_KEY.includes('PASTE_')) {
+          forumClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+        }
+        authForm.addEventListener('submit', async function (event) {
           event.preventDefault();
-          var named = !anonymous.checked;
-          var author = named ? name.value.trim() : '';
-          if (named && !author) {
-            name.focus();
-            return;
-          }
-          forumPosts.push({
-            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-            category: document.getElementById('forumCategory').value,
-            title: document.getElementById('forumTitle').value.trim(),
-            body: document.getElementById('forumBody').value.trim(),
-            anonymous: !named,
-            author: author,
-            createdAt: new Date().toISOString(),
-            replies: [],
-          });
-          saveForumPosts();
+          var email = document.getElementById('forumAccountEmail').value.trim().toLowerCase(),
+            password = document.getElementById('forumAccountPassword').value;
+          if (!forumIsSchoolEmail(email)) { forumSetMessage('Use an email ending in @gms.tcu.edu.tw.', '請使用 @gms.tcu.edu.tw 結尾的電子郵件。'); return; }
+          if (!forumClient) { forumSetMessage('Connect Supabase first using the included setup guide.', '請先依隨附設定說明連結 Supabase。'); return; }
+          forumAuthMessage = null;
+          var result = await forumClient.auth.signInWithPassword({ email: email, password: password });
+          if (result.error) forumSetMessage('Sign-in failed. Check your school email, password, and email verification.', '登入失敗，請確認校園電子郵件、密碼及信箱驗證狀態。');
+        });
+        document.getElementById('forumSignUp').addEventListener('click', async function () {
+          var email = document.getElementById('forumAccountEmail').value.trim().toLowerCase(),
+            password = document.getElementById('forumAccountPassword').value;
+          if (!forumIsSchoolEmail(email)) { forumSetMessage('Use an email ending in @gms.tcu.edu.tw.', '請使用 @gms.tcu.edu.tw 結尾的電子郵件。'); return; }
+          if (password.length < 8) { forumSetMessage('Choose a password with at least 8 characters.', '請設定至少 8 個字元的密碼。'); return; }
+          if (!forumClient) { forumSetMessage('Connect Supabase first using the included setup guide.', '請先依隨附設定說明連結 Supabase。'); return; }
+          forumAuthMessage = null;
+          var result = await forumClient.auth.signUp({ email: email, password: password, options: { emailRedirectTo: window.location.href.split('#')[0] } });
+          if (result.error) forumSetMessage('Account creation failed. Check your email and try again.', '建立帳號失敗，請確認電子郵件後再試。');
+          else if (!result.data.session) forumSetMessage('Check your TCU GMS inbox to confirm your account, then sign in.', '請至慈濟大學 GMS 信箱完成驗證後登入。');
+        });
+        document.getElementById('forumSignOut').addEventListener('click', async function () {
+          if (!forumClient) return;
+          var result = await forumClient.auth.signOut();
+          if (result.error) forumSetMessage('Could not sign out. Please try again.', '登出失敗，請再試一次。');
+        });
+        form.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          if (!forumSession || !forumSession.user || !forumClient) return;
+          var anonymousPost = anonymous.checked, displayName = forumDisplayName(anonymousPost, name);
+          if (!anonymousPost && !displayName) { name.focus(); return; }
+          var result = await forumClient.from('forum_posts').insert({ category: document.getElementById('forumCategory').value, title: document.getElementById('forumTitle').value.trim(), body: document.getElementById('forumBody').value.trim(), anonymous: anonymousPost, display_name: displayName });
+          if (result.error) { forumSetMessage('Posting failed. Please check your connection and try again.', '發文失敗，請檢查連線後再試。'); return; }
           form.reset();
           syncForumName(anonymous, nameRow, name);
-          renderForum();
+          await loadForumPosts();
         });
         feed.addEventListener('change', function (event) {
           var checkbox = event.target;
-          if (checkbox.name !== 'anonymous') return;
-          var form = checkbox.closest('form'),
-            row = form && form.querySelector('.forum-name-row'),
-            input = row && row.querySelector('input[name="author"]');
+          if (!checkbox.matches('input[name="anonymous"]')) return;
+          var replyForm = checkbox.closest('form'), row = replyForm && replyForm.querySelector('.forum-name-row'), input = row && row.querySelector('input[name="author"]');
           if (row && input) syncForumName(checkbox, row, input);
         });
-        feed.addEventListener('submit', function (event) {
-          var form = event.target;
-          if (!form.matches('.forum-reply-form')) return;
+        feed.addEventListener('submit', async function (event) {
+          var replyForm = event.target;
+          if (!replyForm.matches('.forum-reply-form')) return;
           event.preventDefault();
-          var checkbox = form.querySelector('input[name="anonymous"]'),
-            input = form.querySelector('input[name="author"]'),
-            body = form.querySelector('textarea[name="body"]').value.trim(),
-            named = !checkbox.checked,
-            author = named ? input.value.trim() : '';
-          if (!body || (named && !author)) return;
-          var post = forumPosts.find(function (item) {
-            return item.id === form.dataset.threadId;
-          });
-          if (!post) return;
-          if (!Array.isArray(post.replies)) post.replies = [];
-          post.replies.push({
-            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-            body: body,
-            anonymous: !named,
-            author: author,
-            createdAt: new Date().toISOString(),
-          });
-          saveForumPosts();
-          renderForum();
+          if (!forumSession || !forumSession.user || !forumClient) return;
+          var checkbox = replyForm.querySelector('input[name="anonymous"]'), input = replyForm.querySelector('input[name="author"]'),
+            body = replyForm.querySelector('textarea[name="body"]').value.trim(), anonymousReply = checkbox.checked,
+            displayName = forumDisplayName(anonymousReply, input);
+          if (!body || (!anonymousReply && !displayName)) return;
+          var result = await forumClient.from('forum_replies').insert({ post_id: replyForm.dataset.threadId, body: body, anonymous: anonymousReply, display_name: displayName });
+          if (result.error) { forumSetMessage('Reply failed. Please check your connection and try again.', '回覆失敗，請檢查連線後再試。'); return; }
+          await loadForumPosts();
         });
+        if (forumClient) {
+          forumClient.auth.getSession().then(function (result) {
+            forumSession = result.data && result.data.session;
+            updateForumAuthUI();
+            loadForumPosts();
+          });
+          forumClient.auth.onAuthStateChange(function (_event, session) {
+            forumSession = session;
+            forumAuthMessage = null;
+            updateForumAuthUI();
+            loadForumPosts();
+          });
+        } else { updateForumAuthUI(); renderForum(); }
+      }
+      function syncForumName(checkbox, row, input) {
+        row.hidden = checkbox.checked;
+        input.required = !checkbox.checked;
       }
 
       function language() {
@@ -5714,3 +5808,4 @@
     </script>
   </body>
 </html>
+
